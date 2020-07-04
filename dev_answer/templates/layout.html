@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---my style-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <!---favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script src="https://kit.fontawesome.com/888518e0b9.js" crossorigin="anonymous"></script>
+    <!---title-->
+    {% if title %}
+        <title>Dev-Answer | {{ title }}</title>
+    {% else %}
+        <title>Dev-Answer</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><a class="name" href="{{ url_for('home') }}">Dev-Answer</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="nav" href="{{ url_for('home') }}">Home</a></li>
+                <li><a class="nav" href="{{ url_for('about') }}">About</a></li>
+                <li><a class="nav" href="{{ url_for('rules') }}">Rules</a></li>
+                <li><a class="nav" href="{{ url_for('support') }}">Support</a></li>
+            </ul>
+        </nav>
+        <div class="login">
+            <a class="log_butt" href="{{ url_for('login') }}">Sign in</a>
+            <a class="log_butt" href="{{ url_for('register') }}">Sign up</a>
+        </div>
+    </header>
+    <div class="content">
+    {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

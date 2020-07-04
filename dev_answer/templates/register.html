@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+        <form method="POST" action=""> 
+            {{ form.hidden_tag() }}
+                <h1>Dev-Answer</h1>
+                <h2>Welcome</h2>
+                <div class="input">
+                    {% if form.fullname.errors %}
+                    {{ form.fullname(class="") }}
+                    <div class="">
+                        {% for error in form.fullname.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.fullname(placeholder="Full Name") }}
+                {% endif %} 
+                </div>
+                <div class="input">
+                    {% if form.email.errors %}
+                    {{ form.email(class="") }}
+                    <div class="">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(placeholder="E-mail") }}
+                {% endif %} 
+                </div>
+                <div class="input">
+                    {% if form.password.errors %}
+                    {{ form.password(class="") }}
+                    <div class="">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(placeholder="Password") }}
+                {% endif %} 
+                </div>
+                <div class="input">
+                    {% if form.confirm_password.errors %}
+                    {{ form.confirm_password(class="") }}
+                    <div class="">
+                        {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.confirm_password(placeholder="Confirm Password") }}
+                {% endif %} 
+                </div>
+                <div class="submit_btn">
+                    {{ form.submit }}
+                </div>
+            <div class="s_question">
+                <small>Already have an Account?<a class="login_link" href="{{ url_for('login') }}">Sign In</a></small>
+            </div>
+        </form>
+{% endblock %}
