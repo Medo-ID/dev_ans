@@ -1,62 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
+<h1 class="page_title">Sign Up</h1>
+    <div class="sign">
         <form method="POST" action=""> 
             {{ form.hidden_tag() }}
-                <h1>Dev-Answer</h1>
-                <h2>Welcome</h2>
-                <div class="input">
+                <h1 class="one">Dev-Answer</h1>
+                <h2 class="two">Welcome</h2>
+                <div class="">
                     {% if form.fullname.errors %}
-                    {{ form.fullname(class="") }}
+                    {{ form.fullname(class="invalid") }}
                     <div class="">
                         {% for error in form.fullname.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.fullname(placeholder="Full Name") }}
+                    {{ form.fullname(class="input", placeholder="Full Name") }}
                 {% endif %} 
                 </div>
-                <div class="input">
+                <div class="">
                     {% if form.email.errors %}
-                    {{ form.email(class="") }}
+                    {{ form.email(class="invalid") }}
                     <div class="">
                         {% for error in form.email.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(placeholder="E-mail") }}
+                    {{ form.email(class="input", placeholder="E-mail") }}
                 {% endif %} 
                 </div>
-                <div class="input">
+                <div class="">
                     {% if form.password.errors %}
-                    {{ form.password(class="") }}
+                    {{ form.password(class="invalid") }}
                     <div class="">
                         {% for error in form.password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.password(placeholder="Password") }}
+                    {{ form.password(class="input", placeholder="Password") }}
                 {% endif %} 
                 </div>
-                <div class="input">
+                <div class="">
                     {% if form.confirm_password.errors %}
-                    {{ form.confirm_password(class="") }}
+                    {{ form.confirm_password(class="invalid") }}
                     <div class="">
                         {% for error in form.confirm_password.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.confirm_password(placeholder="Confirm Password") }}
+                    {{ form.confirm_password(class="input", placeholder="Confirm Password") }}
                 {% endif %} 
                 </div>
-                <div class="submit_btn">
-                    {{ form.submit }}
+                <div class="">
+                    {{ form.submit(class="submit_btn") }}
                 </div>
             <div class="s_question">
-                <small>Already have an Account?<a class="login_link" href="{{ url_for('login') }}">Sign In</a></small>
+                <small>Already have an Account?<a class="_link" href="{{ url_for('login') }}">Sign In</a></small>
             </div>
         </form>
+    </div>   
 {% endblock %}
