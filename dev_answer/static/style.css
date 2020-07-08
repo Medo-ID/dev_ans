@@ -67,6 +67,7 @@ nav ul li{
 }
 
 .log_butt{
+    display: inline-block;
     text-decoration: none;
     border: 1px solid #00b3b3;
     background: whitesmoke;
@@ -317,4 +318,13 @@ span{
     font-size: small;
     margin: 5px 0;
     color: #ff0000;
+}
+
+/*-----profile----*/
+
+.user_image{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    float: left;
 }
