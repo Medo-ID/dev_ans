@@ -1,17 +1,21 @@
 {% extends "layout.html" %}
+<h1 class="page_title">Profile</h1>
 {% block content %}
-<div class="">
+<h1 class="page_title">Profile</h1>
+<fieldset id="section1">
+    <legend>Profile Info</legend>
     <div class="">
       <img class="user_image" src="{{ image_file }}">
-      <div class="">
-        <h2 class="">{{ current_user.fullname}}</h2>
-        <p class="">{{ current_user.email }}</p>
+      <div class="info">
+        <h2 class="name_mail">{{ current_user.fullname}}</h2>
+        <p class="name_mail">{{ current_user.email }}</p>
       </div>
     </div>
-    <div class="sign">
-        <form method="POST" action=""> 
+    <hr>
+    <div class="">
+        <form method="POST" action="" enctype="multipart/form-data"> 
             {{ form.hidden_tag() }}
-                <h3 class="two">Profile Info</h3>
+                <h3 class="mini_title">Edite your info</h3>
                 <div class="">
                     {% if form.fullname.errors %}
                     {{ form.fullname(class="") }}
@@ -21,7 +25,7 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.fullname(class="", placeholder="Username") }}
+                    {{ form.fullname(class="change", placeholder="Username") }}
                 {% endif %} 
                 </div>
                 <div class="">
@@ -33,22 +37,41 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.email(class="", placeholder="E-mail") }}
+                    {{ form.email(class="change", placeholder="E-mail") }}
                 {% endif %} 
-                <div class="">
+                </div>
+                <div class="pict_up">
                     {{ form.picture.label() }}
                     {{ form.picture(class="") }}
                     {% if form.picture.errors %}
                         {% for error in form.picture.errors %}
-                            <span>{{ error }}</span></br>
+                            <span>{{ error }}</span><br>
                         {% endfor %}
                     {% endif %}
                 </div>
-                </div>
                 <div class="">
-                    {{ form.submit(class="submit_btn") }}
+                    {{ form.submit(class="update_btn") }}
                 </div>
         </form>
     </div>
-  </div>
+</fieldset>
+<fieldset id="section2">
+    <legend>Your Questions</legend>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.date_posted }}</td>
+                <td><a href="#"></a>Edit</td>
+            </tr>
+        {% endfor %}
+    </table>
+</fieldset>
 {% endblock content %}

@@ -2,16 +2,38 @@
 {% block content %}
   <h1>Ask Questions</h1>
   <p>Here you can Ask Questions for getting help from dev community</p>
-        <div class="content-section">
-            <form method="POST" action="">
-            <label for="title">Title</label>
-            <input required type="text" name="title" id="title" class="form-control">
-            <label for="question">Describe Your Question</label>
-            <textarea name="question" id="question" class="from-control" ></textarea>                
+  <div class="">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.title.label(class="") }}
+                {% if form.title.errors %}
+                    {{ form.title(class="") }}
+                    <div class="">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class="") }}
+                {% endif %}
+            </div>
+            <div class="">
+                {{ form.content.label(class="") }}
+                {% if form.content.errors %}
+                    {{ form.content(class="", id="editor") }}
+                    <div class="">
+                        {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.content(class="", id="editor") }}
+                {% endif %}
+            </div>
+        <div class="">
+            {{ form.submit(class="") }}
         </div>
-        <script>
-            CKEDITOR.replace('question');
-        </script>
-    <a href="/" class="btn btn-secondary">Cancel</a>
-    <button type="submit" class="btn btn-primary">Ask</button>
+    </form>
+</div>    
 {% endblock %}

@@ -11,8 +11,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <script src="https://kit.fontawesome.com/888518e0b9.js" crossorigin="anonymous"></script>
-    <!---Editor-->
-    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
     <!---title-->
     {% if title %}
         <title>Dev-Answer | {{ title }}</title>
@@ -53,9 +51,14 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
-      </div>
+    </div>
     <div class="content">
     {% block content %}{% endblock %}
     </div>
+    <!---Editor-->
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+    </script> 
 </body>
 </html>

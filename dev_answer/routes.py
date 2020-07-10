@@ -1,16 +1,18 @@
 import os
 import secrets
+from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from dev_answer import app, db, bcrypt
-from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm
+from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm
 from dev_answer.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
-        
+
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', title='Home')
+    posts = Post.query.all()
+    return render_template('home.html', posts=posts)
 
 @app.route("/about")
 def about():
@@ -24,9 +26,17 @@ def rules():
 def support():
     return render_template('support.html', title='Support')
 
-@app.route("/ask_question")
+@app.route("/ask_question", methods=['GET', 'POST'])
+@login_required
 def ask_question():
-    return render_template('ask.html', title='Ask Question')
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your question has been created!')
+        return redirect(url_for('home'))
+    return render_template('ask.html', title='Ask Question', form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -60,15 +70,15 @@ def login():
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
+    throw, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/profile_picts', picture_fn)
-
+    
     output_size = (150, 150)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
-
+    
     return picture_fn
 
 
@@ -88,9 +98,18 @@ def profile():
     elif request.method == 'GET': 
         form.fullname.data = current_user.fullname
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_picts/')
-    return render_template('profile.html', title='Your Profile', image_file=image_file, form=form)
+    image_file = url_for('static', filename='profile_picts/' + current_user.image_file)
+    return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', image_file=image_file, form=form)
 
+    def questions():
+        cur = get_db().cursor()
+        result = cur.execute('SELECT * FROM posts')
+        posts = cur.fetchall()
+        if result > 0:
+            return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', posts=posts)
+        else:
+            msg = 'No Questions Yet!'
+            return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', msg=msg)
 
 @app.route("/logout")
 def logout():

@@ -8,14 +8,15 @@
     </a>
   </div>
   <div class="tags">
-    <a class="tag" href="#">Python</a>
-    <a class="tag" href="#">Java Script</a>
-    <a class="tag" href="#">Html</a>
-    <a class="tag" href="#">Css</a>
+    <a class="tag" href="#">.Py</a>
+    <a class="tag" href="#">.Js</a>
+    <a class="tag" href="#">.Cs</a>
   </div>
   <button class="ask"><a href="{{ url_for('ask_question') }}">Ask Question</a></button>
 </div>
-<h1>Med</h1>
-<h3>Title post</h3>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-{% endblock content %}
+{% for post in posts %}
+  <h1>{{ post.title }}</h1>
+  <p>By {{ post.author }} on {{ post.date_posted }}</p>
+  <p>{{ post.content | safe}}</p>
+{% endfor %}
+{% endblock %}
