@@ -5,6 +5,10 @@
     padding: auto;
     font-family: 'Raleway', sans-serif;
 }
+
+body{
+    background-color: rgb(199, 199, 199);
+}
 /*---------header style---------*/
 header{
     background-color: whitesmoke;
@@ -18,18 +22,24 @@ header{
 .logo{
     position: absolute;
     top: 15px;
-    left: 100px;
+    left: 5%;
 }
 
 .name{
     color: 	#00b3b3;
     text-decoration: none;
+    font-family: monospace, sans-serif;
+    padding: 10px;
+}
+
+.name:hover{
+    color: #075757;
 }
 
 nav ul{
     position: absolute;
     top: 20px;
-    left: 520px;
+    left: 31.5%;
 }
 
 nav ul li{
@@ -48,6 +58,7 @@ nav ul li{
     border-radius: 50px;
     display: block;
     padding: 5px 10px;
+    font-family: monospace, sans-serif;
 }
 
 .nav:hover{
@@ -55,7 +66,7 @@ nav ul li{
     background-color: #00b3b3;
     color: whitesmoke;
     border: none;
-    border-radius: 50px;
+    border-radius: 20px 0 20px 0;
     display: block;
     padding: 5px 10px;
 }
@@ -63,7 +74,7 @@ nav ul li{
 .login{
     position: absolute;
     top: 18px;
-    right: 100px;
+    right: 5%;
 }
 
 .log_butt{
@@ -72,7 +83,7 @@ nav ul li{
     border: 1px solid #00b3b3;
     background: whitesmoke;
     color: #00b3b3;
-    border-radius: 100px;
+    border-radius: 15px 0 15px 0;
     padding: 5px 20px;
     cursor: pointer;
     font-size: 16px;
@@ -87,17 +98,29 @@ nav ul li{
 
 .page_title{
     font-weight: 600;
-    color: #075757;
+    color: whitesmoke;
     position: absolute;
     top: 90px;
     left: 47%;
     transform: scale(0 -50%);
+    text-shadow:0px 0px 10px #00b3b3;
+    z-index: -1;
+}
+
+.page_title_ask{
+    font-weight: 600;
+    color: whitesmoke;
+    position: absolute;
+    top: 90px;
+    left: 43%;
+    transform: scale(0 -50%);
+    text-shadow:0px 0px 10px #00b3b3;
     z-index: -1;
 }
 
 /*---------content style---------*/
 .tags_bar{
-    width: 50%;
+    width: 60%;
     height: 25px;
     background-color: whitesmoke;
     position: fixed;
@@ -105,11 +128,14 @@ nav ul li{
     margin-left: -21px;
     padding: 20px;
     border: 1px double #00b3b3;
+    border-radius: 20px 0 20px 0;
     /*box-shadow:0px 4px 15px gray;*/
 }
 
 .tags{
-    margin-left: 300px;
+    position: fixed;
+    top: 98px;
+    left: 43.5%;
 }
 
 .tag{
@@ -117,58 +143,61 @@ nav ul li{
     font-weight: 600;
     border: 1px solid #00b3b3;
     color: #00b3b3;
-    border-radius: 50%;
+    border-radius: 15px 0 15px 0;
     padding: 10px;
     margin: -5px 5px 5px 5px;
     text-decoration: none;
     display: inline-block;
     text-align: center;
+    font-family: monospace, sans-serif;
 }
 
 .ask{
     border: none;
-    border-radius: 50px;
+    border-radius: 15px 0 15px 0;
     background: #00b3b3;
     padding: 15px;
     position: fixed;
     top: 88px;
-    right: 24.5%;
+    right: 20%;
 }
 
 .ask a{
     color: white;
     text-decoration: none;
-    font-size: larger;
+    font-size: 16px;
     font-weight: 500;
 }
 
 .content{
-    width: 50%;
+    width: 60%;
     height: 100%;
     background-color: whitesmoke;
     margin: 155px auto auto auto;
-    border: 1px solid #00b3b3;
+    border-radius: 20px 0 20px 0;
     padding: 20px;
 }
 
 .search-box{
     position: fixed;
     top: 88px;
-    left: 24.5%;
+    left: 20%;
     background-color: #00b3b3;
     color: white;
-    border-radius: 40px;
+    border-radius: 15px 0 15px 0;
     height: 30px;
     padding: 10px;
+    z-index: 10;
 }
 
 .search-box:hover > .search-area{
-    width: 180px;
+    width: 200px;
     padding: 0 5px;
 }
 
 .search-box:hover > .search-btn{
     background: #075757;
+    z-index: 10;
 }
 
 .search-btn{
@@ -182,6 +211,7 @@ nav ul li{
     justify-content: center;
     align-items: center;
     transition: 0.4s;
+    z-index: 10;
 }
 
 .search-area{
@@ -195,6 +225,7 @@ nav ul li{
     transition: 0.4s;
     line-height: 30px;
     width: 0;
+    z-index: 10;
 }
 
 /*-------about us------*/
@@ -323,7 +354,7 @@ span{
 /*-----profile----*/
 
 .user_image{
-    border-radius: 50%;
+    border-radius: 20px 0 20px 0;
     width: 150px;
     height: 150px;
     margin-left: 10px;
@@ -345,7 +376,7 @@ legend{
 
 .info{
    float: right;
-   margin-right: 400px;
+   margin-right: 550px;
    margin-top: 20px;
 }
 
@@ -389,4 +420,135 @@ legend{
 
 .update_btn:hover{
     background: #00b3b3;
+}
+
+/*-----post style--------*/
+.post_style{
+    width: 100%;
+    border: 2px solid #008383;
+    margin-left: -19px;
+    margin-bottom: 20px;
+    border-radius: 20px 0 20px 0;
+    padding: 10px 24px 10px 10px;
+}
+
+.image_home{
+    padding-right: 20px;
+    border-right: 2px solid #00b3b3;
+    margin: -5px 20px 5px -5px;
+    border-radius: 20px 0 20px 0;
+    width: 90px;
+    height: 90px;
+    float: left;
+}
+
+.post_style h1{
+    font-size: 22px;
+    margin-bottom: -20px;
+}
+
+.post_style h2{
+    font-size: 30px;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+.post_style p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    text-align: justify;
+    width: 95%;
+    font-size: 15px;
+    margin: 0;
+    padding-right: 10px;
+}
+
+.post_style small{
+    font-size: smaller;
+    font-weight: 600;
+    font-family: monospace, sans-serif;
+    margin-bottom: 20px;
+    color: #075757;
+}
+
+.post_style h1 a{
+    text-decoration: none;
+    color: #00b3b3;
+}
+.post_style h2 a{
+    text-decoration: none;
+    color: black;
+}
+
+.link_post{
+    text-decoration: none;
+    color: black;
+}
+
+.post_style hr{
+    border: none;
+}
+
+
+
+/*---------ask question page--------*/
+.diff{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-decoration: solid #00b3b3;
+    font-weight: 600;
+}
+
+.label_title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: monospace, sans-serif;
+}
+
+.question_title{
+    width: 50%;
+    height: 30px;
+    border: 0.5px solid #00b3b3;
+    border-radius: 5px 0 5px 0;
+    margin-bottom: 10px;
+}
+
+.label_description{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: monospace, sans-serif;
+}
+
+.post_quest{
+    font-family: monospace, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 20px;
+    color: whitesmoke;
+    background: #00b3b3;
+    cursor: pointer;
+}
+
+.cancel_home{
+    font-family: monospace, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 20px;
+    color: whitesmoke;
+    background: #075757;
+}
+
+.button_post{
+    position: relative; 
 }

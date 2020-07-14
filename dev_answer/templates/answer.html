@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="post_style">
+    <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
+    <h1><a href="{{ url_for('profile') }}">{{ post.author.fullname }}</a></h1><br>
+    <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small><br>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content | safe}}</p>
+  </div>
+  <hr>
+{% for post in posts %}
+    <div class="post_style">
+        <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
+        <h1>{{ post.author.fullname }}</h1><br>
+        <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small><br>
+        <p>{{ post.body | safe }}</p>
+    </div>
+{% endfor %}
+<form method="POST" action="{{ url_for('answer', post_id=post.id) }}">
+    {{ form.hidden_tag() }}
+    <div class="">
+        {{ form.body.label(class="label_description") }}
+        {% if form.body.errors %}
+            {{ form.body(class="quest_description", id="editor") }}
+            <div class="">
+                {% for error in form.body.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.body(class="quest_description", id="editor") }}
+        {% endif %}
+    </div>
+    <div class="button_post">
+        {{ form.submit(class="post_quest") }}
+    </div>
+</form>
+{% endblock %}

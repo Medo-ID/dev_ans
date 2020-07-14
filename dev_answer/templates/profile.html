@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-<h1 class="page_title">Profile</h1>
 {% block content %}
 <h1 class="page_title">Profile</h1>
 <fieldset id="section1">
@@ -55,20 +54,20 @@
         </form>
     </div>
 </fieldset>
-<fieldset id="section2">
+<fieldset>
     <legend>Your Questions</legend>
     <table>
         <tr>
             <th>ID</th>
             <th>Title</th>
             <th>Date</th>
-            <th></th>
+            <th>Action</th>
         </tr>
         {% for post in posts %}
             <tr>
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
-                <td>{{ post.date_posted }}</td>
+                <td>{{ post.date_posted.strftime('%Y-%m-%d') }}</td>
                 <td><a href="#"></a>Edit</td>
             </tr>
         {% endfor %}

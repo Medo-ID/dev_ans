@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="page_title">Sign In</h1>
+    <div class="sign">
+        <form method="POST" action=""> 
+            {{ form.hidden_tag() }}
+            <h1 class="one">Dev-Answer</h1>
+            <h2 class="two">Reset Password</h2>
+            <div class="">
+                {% if form.email.errors %}
+                {{ form.email(class="invalid") }}
+                <div class="">
+                    {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.email(class="input", placeholder="E-mail") }}
+            {% endif %} 
+            </div>
+            <div class="">
+                {{ form.submit(class="submit_btn") }}
+            </div>
+        </form>
+    </div>    
+{% endblock %}

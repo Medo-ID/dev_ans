@@ -15,8 +15,12 @@
   <button class="ask"><a href="{{ url_for('ask_question') }}">Ask Question</a></button>
 </div>
 {% for post in posts %}
-  <h1>{{ post.title }}</h1>
-  <p>By {{ post.author }} on {{ post.date_posted }}</p>
-  <p>{{ post.content | safe}}</p>
+<div class="post_style">
+  <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
+  <h1>{{ post.author.fullname }}</h1><br>
+  <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small><br>
+  <h2><a href="{{ url_for('answer', post_id=post.id) }}">{{ post.title }}</a></h2>
+  <p><a class="link_post" href="{{ url_for('answer', post_id=post.id) }}">{{ post.content | safe }}</a></p>
+</div>
 {% endfor %}
 {% endblock %}

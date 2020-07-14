@@ -21,7 +21,7 @@
 <body>
     <header>
         <div class="logo">
-            <h1><a class="name" href="{{ url_for('home') }}">Dev-Answer</a></h1>
+            <h1><a class="name" href="{{ url_for('home') }}">&lt;/Dev-Answer&gt;</a></h1>
         </div>
         <nav>
             <ul>
@@ -36,23 +36,23 @@
                 <a class="log_butt" href="{{ url_for('profile') }}">Profile</a>
                 <a class="log_butt" href="{{ url_for('logout') }}">Log out</a>
             {% else %}
-                <a class="log_butt" href="{{ url_for('login') }}">Sign in</a>
-                <a class="log_butt" href="{{ url_for('register') }}">Sign up</a>
+                <a class="log_butt" href="{{ url_for('login') }}">Sign In</a>
+                <a class="log_butt" href="{{ url_for('register') }}">Sign Up</a>
             {% endif %}
         </div>
     </header>
-    <div class="">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert alert-{{ category }}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-    </div>
     <div class="content">
+        <div class="alert-message">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
     {% block content %}{% endblock %}
     </div>
     <!---Editor-->

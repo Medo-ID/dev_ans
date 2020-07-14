@@ -2,16 +2,17 @@ import os
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
-from dev_answer import app, db, bcrypt
-from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm
-from dev_answer.models import User, Post
+from dev_answer import app, db, bcrypt, mail
+from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm, RequestResetPassForm, ResetPassForm, AnswerForm 
+from dev_answer.models import User, Post, Comment
 from flask_login import login_user, current_user, logout_user, login_required
+from flask_mail import Message
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('home.html', posts=posts)
 
 @app.route("/about")
@@ -37,6 +38,20 @@ def ask_question():
         flash('Your question has been created!')
         return redirect(url_for('home'))
     return render_template('ask.html', title='Ask Question', form=form)
+
+@app.route("/answer/<int:post_id>", methods=['GET', 'POST'])
+@login_required
+def answer(post_id):
+    post = Post.query.get_or_404(post_id)   
+    form = AnswerForm()
+    if form.validate_on_submit():
+        comment = Comment(body=form.body.data, post_id=post.id)
+        db.session.add(comment)
+        db.session.commit()
+        flash("Your Answer has been added to the post!")
+        comments = Comment.query.get(post_id).order_by(Comment.date_posted.desc())
+        return redirect(url_for("answer", post_id=post.id, comments=comments))
+    return render_template('answer.html',title='Answer', form=form, post=post)    
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -101,17 +116,52 @@ def profile():
     image_file = url_for('static', filename='profile_picts/' + current_user.image_file)
     return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', image_file=image_file, form=form)
 
-    def questions():
-        cur = get_db().cursor()
-        result = cur.execute('SELECT * FROM posts')
-        posts = cur.fetchall()
-        if result > 0:
-            return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', posts=posts)
-        else:
-            msg = 'No Questions Yet!'
-            return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', msg=msg)
-
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+def send_reset_mail(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', sender='midaghdour@gmail.com', recipients=[user.email])
+    msg.body = f'''To reset your password, click the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request, you can ignore this email!
+Dev-Answer team.
+Have a great day
+'''
+    mail.send(msg)
+
+
+@app.route("/request_reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetPassForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_mail(user)
+        flash('An email has been sent with instructions to reset your password.')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', title='Reset The Password', form=form)
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That in an invalid or expired token')
+        return redirect(url_for('reset_request'))
+    form = ResetPassForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Your password has been updates successfully! You can now log in with the new password')
+        return redirect(url_for('login'))    
+    return render_template('reset_token.html', title='Reset Your Password', form=form)
+
+  

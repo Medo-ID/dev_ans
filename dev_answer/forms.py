@@ -2,14 +2,17 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, InputRequired
 from dev_answer.models import User
 
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    submit = SubmitField('Post')
+    content = TextAreaField('Describe the Question', validators=[DataRequired(), Length(min=150)])
+    submit = SubmitField('Add Question')
+class AnswerForm(FlaskForm):
+    body = TextAreaField('Your Answer', validators=[DataRequired(), Length(min=150)]) 
+    submit = SubmitField('Add Answer')   
 
 class RegistrationForm(FlaskForm):
     fullname = StringField('Full name',
@@ -59,4 +62,22 @@ class UpdateProfileForm(FlaskForm):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
-                raise ValidationError('That email is already taken. Please Choose a different one.')        
+                raise ValidationError('That email is already taken. Please Choose a different one.') 
+
+
+class RequestResetPassForm(FlaskForm):
+    email = StringField('E-mail',
+                             validators=[DataRequired(), Email()])
+    submit = SubmitField('Send Request')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no account with this email. You must sing up first.')
+
+class ResetPassForm(FlaskForm):
+    password = PasswordField('Password',
+                             validators=[DataRequired(), Length(min=4,)])
+    confirm_password = PasswordField('Confirm Password',
+                             validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')               
