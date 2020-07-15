@@ -8,10 +8,10 @@ from dev_answer.models import User
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Describe the Question', validators=[DataRequired(), Length(min=150)])
+    content = TextAreaField('Describe the Question', validators=[DataRequired()])
     submit = SubmitField('Add Question')
 class AnswerForm(FlaskForm):
-    body = TextAreaField('Your Answer', validators=[DataRequired(), Length(min=150)]) 
+    body = TextAreaField('Your Answer', validators=[DataRequired()]) 
     submit = SubmitField('Add Answer')   
 
 class RegistrationForm(FlaskForm):

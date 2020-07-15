@@ -42,16 +42,16 @@ def ask_question():
 @app.route("/answer/<int:post_id>", methods=['GET', 'POST'])
 @login_required
 def answer(post_id):
-    post = Post.query.get_or_404(post_id)   
+    post = Post.query.get_or_404(post_id) 
+    answers = Comment.query.get(post_id)  
     form = AnswerForm()
     if form.validate_on_submit():
-        comment = Comment(body=form.body.data, post_id=post.id)
+        comment = Comment(body=form.body.data, post_id=post.id, author=current_user)
         db.session.add(comment)
         db.session.commit()
         flash("Your Answer has been added to the post!")
-        comments = Comment.query.get(post_id).order_by(Comment.date_posted.desc())
-        return redirect(url_for("answer", post_id=post.id, comments=comments))
-    return render_template('answer.html',title='Answer', form=form, post=post)    
+        return redirect(url_for("answer", post_id=post.id))
+    return render_template('answer.html', title='Answers', post=post, answers=answer, form=form)    
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
