@@ -1,4 +1,61 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1 class="page_title">Support</h1>
+<div class="sign">
+    <form method="POST" action=""> 
+        {{ form.hidden_tag() }}
+            <h1 class="one">Dev-Answer Team</h1>
+            <h2 class="two">Need help? ...You have issue with our website? Take while and contact us, to help you :)</h2>
+            <div class="">
+                {% if form.name.errors %}
+                {{ form.fullname(class="invalid") }}
+                <div class="">
+                    {% for error in form.name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.name(class="input", placeholder="Your name") }}
+            {% endif %} 
+            </div>
+            <div class="">
+                {% if form.e_mail.errors %}
+                {{ form.e_mail(class="invalid") }}
+                <div class="">
+                    {% for error in form.e_mail.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.e_mail(class="input", placeholder="Your E-mail") }}
+            {% endif %} 
+            </div>
+            <div class="">
+                {% if form.issue.errors %}
+                {{ form.issue(class="invalid") }}
+                <div class="">
+                    {% for error in form.issue.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.issue(class="input", placeholder="Your Issue or Problem") }}
+            {% endif %} 
+            </div>
+            <div class="">
+                {% if form.description.errors %}
+                {{ form.description(class="invalid") }}
+                <div class="">
+                    {% for error in form.description.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.description(class="input", placeholder="Describe Your Issue or Problem") }}
+            {% endif %} 
+            </div>
+            <div class="">
+                {{ form.submit(class="submit_btn") }}
+            </div>
+    </form>
 {% endblock %}

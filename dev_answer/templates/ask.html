@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h1 class="page_title_ask">Ask Questions</h1>
-  <p class="diff">Here you can Ask Questions for getting help from dev community.</p>
+<h1 class="page_title_ask">{{ page_title }}</h1>
+  <p class="diff">{{ legend }}</p>
   <div class="">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
@@ -33,7 +33,7 @@
             </div>
         <div class="button_post">
             <a class="cancel_home" href="{{ url_for('home') }}">Cancel</a>
-            {{ form.submit(class="post_quest") }}
+            {{ form.submit(class="post_quest", value=submit) }}
         </div>
     </form>
 </div>    

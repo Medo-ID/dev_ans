@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<h1 class="page_title">Answer</h1>
 <div class="post_style">
     <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
     <h1><a href="{{ url_for('profile') }}">{{ post.author.fullname }}</a></h1><br>
@@ -7,16 +8,17 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.content | safe}}</p>
 </div>
-<hr>
+<hr class="splite">
+<h2 class="second_answers">Answers</h2>
 {% for comment in post.post_comments %}
-    <div class="post_style">
+    <div class="answer_style">
         <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
         <h1>{{ comment.author.fullname }}</h1><br>
         <small>{{ comment.date_posted.strftime('%Y-%m-%d') }}</small><br>
-        <p>{{ comment.body }}</p>
+        <p>{{ comment.body | safe }}</p>
     </div>
 {% endfor %}    
-<hr>
+<hr class="splite">
 <form method="POST" action="{{ url_for('answer', post_id=post.id) }}">
     {{ form.hidden_tag() }}
     <div class="">

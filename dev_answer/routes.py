@@ -1,9 +1,9 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from dev_answer import app, db, bcrypt, mail
-from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm, RequestResetPassForm, ResetPassForm, AnswerForm 
+from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm, RequestResetPassForm, ResetPassForm, AnswerForm, ContactUsForm 
 from dev_answer.models import User, Post, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
@@ -23,9 +23,13 @@ def about():
 def rules():
     return render_template('rules.html', title='Rules & Terms Of Ues')
 
-@app.route("/support")
+@app.route("/support", methods=['GET', 'POST'])
 def support():
-    return render_template('support.html', title='Support')
+    form = ContactUsForm()
+    if form.validate_on_submit():
+        flash("Your Message has been sent, we will contact you ASAP!")
+        return redirect(url_for("home"))
+    return render_template('support.html', title='Support', form=form)
 
 @app.route("/ask_question", methods=['GET', 'POST'])
 @login_required
@@ -37,7 +41,28 @@ def ask_question():
         db.session.commit()
         flash('Your question has been created!')
         return redirect(url_for('home'))
-    return render_template('ask.html', title='Ask Question', form=form)
+    return render_template('ask.html', title='Ask Question', page_title='Ask Your Question', 
+                            legend='Here you can Ask Questions for getting help from dev community.', 
+                            form=form, submit='Add Question', )
+
+@app.route("/ask_question/<int:post_id>/edit", methods=['GET', 'POST'])
+@login_required
+def update_question(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('ask.html', title='Edit Question', form=form, page_title='Edit Your Question', 
+                            legend='Here you can Edit your Questions.', submit='Update Question')    
 
 @app.route("/answer/<int:post_id>", methods=['GET', 'POST'])
 @login_required
@@ -100,6 +125,7 @@ def save_picture(form_picture):
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
+    posts = Post.query.filter_by(author=current_user)
     form = UpdateProfileForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -108,13 +134,13 @@ def profile():
         current_user.fullname = form.fullname.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('you account has been updated successfully !')
+        flash('your account has been updated successfully !', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET': 
         form.fullname.data = current_user.fullname
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile_picts/' + current_user.image_file)
-    return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', image_file=image_file, form=form)
+    return render_template('profile.html', title=current_user.fullname+"'"+'s'+' '+'Profile', image_file=image_file, form=form, posts=posts)
 
 @app.route("/logout")
 def logout():
@@ -164,4 +190,3 @@ def reset_token(token):
         return redirect(url_for('login'))    
     return render_template('reset_token.html', title='Reset Your Password', form=form)
 
-  

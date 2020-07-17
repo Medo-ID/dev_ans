@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1 class="page_title">Profile</h1>
-<fieldset id="section1">
-    <legend>Profile Info</legend>
+<section id="section1">
+    <h2 class="legend">Profile Info</h2>
     <div class="">
       <img class="user_image" src="{{ image_file }}">
       <div class="info">
@@ -53,24 +53,24 @@
                 </div>
         </form>
     </div>
-</fieldset>
-<fieldset>
-    <legend>Your Questions</legend>
+</section>
+<section>
+    <h2 class="legend">Your Questions</h2>
     <table>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Action</th>
+        <tr class="dash_gtitle">
+            <th class="dash_id">ID</th>
+            <th class="dash_title">Title</th>
+            <th class="dash_date">Date</th>
+            <th class="dash_act">Action</th>
         </tr>
         {% for post in posts %}
-            <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.date_posted.strftime('%Y-%m-%d') }}</td>
-                <td><a href="#"></a>Edit</td>
-            </tr>
+        <tr>
+            <td class="dash_ids">{{ post.id }}</td>
+            <td class="dash_titles"><a href="{{ url_for('answer', post_id=post.id) }}">{{ post.title }}</a></td>
+            <td class="dash_dates">{{ post.date_posted.strftime('%Y-%m-%d') }}</td>
+            <td class="dash_acts"><a href="{{ url_for('update_question', post_id=post.id) }}">Edit</a></td>
+        </tr>
         {% endfor %}
     </table>
-</fieldset>
+</section>
 {% endblock content %}

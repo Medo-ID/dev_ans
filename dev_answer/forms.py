@@ -81,3 +81,14 @@ class ResetPassForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',
                              validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')               
+
+class ContactUsForm(FlaskForm):
+    name = StringField('Your Name',
+                             validators=[DataRequired()])
+    e_mail = StringField('Your E-mail',
+                             validators=[DataRequired(), Email()])
+    issue = StringField('Issue',
+                             validators=[DataRequired()])
+    description = TextAreaField('Describe Your Issue', 
+                             validators=[DataRequired()])
+    submit = SubmitField('Send')                   
