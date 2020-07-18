@@ -18,6 +18,10 @@
                     {{ form.title(class="question_title") }}
                 {% endif %}
             </div>
+            <div class="tags-container">
+                {{ form.category.label(class="label_title") }}<br>
+                {{ form.category(class="categorys") }}
+            </div>
             <div class="">
                 {{ form.content.label(class="label_description") }}
                 {% if form.content.errors %}

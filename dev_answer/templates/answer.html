@@ -3,8 +3,8 @@
 <h1 class="page_title">Answer</h1>
 <div class="post_style">
     <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
-    <h1><a href="{{ url_for('profile') }}">{{ post.author.fullname }}</a></h1><br>
-    <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small><br>
+    <h1>{{ post.author.fullname }}</h1><br>
+    <small>{{ post.date_posted.strftime('%Y-%m-%d') }}</small><p3 class="dash">-</p3><small class="tag_cat">{{ post.category }}</small><br>
     <h2>{{ post.title }}</h2>
     <p>{{ post.content | safe}}</p>
 </div>
@@ -14,7 +14,7 @@
     <div class="answer_style">
         <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
         <h1>{{ comment.author.fullname }}</h1><br>
-        <small>{{ comment.date_posted.strftime('%Y-%m-%d') }}</small><br>
+        <small>{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
         <p>{{ comment.body | safe }}</p>
     </div>
 {% endfor %}    

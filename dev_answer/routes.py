@@ -15,6 +15,21 @@ def home():
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('home.html', posts=posts)
 
+@app.route("/python.html")
+def ask_py():
+    posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Python")
+    return render_template('python.html', title='Python Question', posts=posts)
+
+@app.route("/javascrip.html")
+def ask_js():
+    posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Javascrip")
+    return render_template('javascrip.html', title='JavaScript Question', posts=posts)
+
+@app.route("/cs.html")
+def ask_cs():
+    posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="C#")
+    return render_template('cs.html', title='C# Question', posts=posts)        
+
 @app.route("/about")
 def about():
     return render_template('about.html', title='About Us')
@@ -36,7 +51,7 @@ def support():
 def ask_question():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        post = Post(title=form.title.data, category=form.category.data, content=form.content.data, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your question has been created!')
