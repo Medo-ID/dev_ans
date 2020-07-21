@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="tags_bar">
-  <div class="search-box">
-    <input class="search-area" type="text" name="" placeholder="Ask Question...Find Answer">
-    <a class="search-btn" href="#">
-  <i class="fas fa-search"></i>
-    </a>
-  </div>
+  <from class="search-box" method="GET" action="search">
+    <input type="text" class="search-area" name="query" id="query" placeholder="Search Question..get Answer">
+    <button type="submit" class="search-btn">Search</button>
+  </from>
   <div class="tags">
     <a class="tag" href="python.html">.Py</a>
     <a class="tag" href="javascrip.html">.Js</a>

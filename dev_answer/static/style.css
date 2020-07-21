@@ -12,6 +12,13 @@ body{
 
 /*---------aleart messages-------*/
 
+.alert-success{
+    text-align: center;
+    color: #439e9e;
+    margin: 10px auto;
+    font-weight: 500;
+    font-size: 16px;
+}
 
 /*---------header style---------*/
 
@@ -195,6 +202,7 @@ nav ul li{
     z-index: 10;
 }
 
+
 .search-box:hover > .search-area{
     width: 200px;
     padding: 0 5px;
@@ -207,15 +215,16 @@ nav ul li{
 
 .search-btn{
     color: white;
-    height: 30px;
-    width: 30px;
     float: right;
+    padding: 5px;
     background: #00b3b3;
-    border-radius: 50%;
-    display: flex;
+    border: 1px solid white;
+    border-radius: 10px 0 10px 0;
+    display: block;
     justify-content: center;
     align-items: center;
     transition: 0.4s;
+    cursor: pointer;
     z-index: 10;
 }
 
@@ -730,8 +739,28 @@ tr td a{
     border: 1px solid #075757;
 }
 
+.copie_right{
+    width: 200px;
+    position: fixed;
+    top: 650px;
+    left: 10px;
+    font-family: monospace, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 @media only screen and (max-width: 400px){
     
+    .input_text{
+        border: none;
+        margin: 10px 20px 10px -24px;
+        padding-left: 10px;
+        border-radius: 10px;
+        width: 260px;
+        height: 120px;
+        box-shadow:0px 0px 5px #a1a1a1;
+    }
+
     .question_title{
         width: 240px;
     }
@@ -863,8 +892,9 @@ tr td a{
     }
     
     .search-btn{
+        padding: 5px 10px;
+        width: 40px;
         height: 25px;
-        width: 25px;
     }
     
     .search-area{
@@ -1057,6 +1087,16 @@ tr td a{
 
     .dash_acts a{
         color: white;
+    }
+
+    .copie_right{
+        width: 280px;
+        position: relative;
+        top: 10px;
+        left: 20px;
+        font-family: monospace, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
     }
 
 }

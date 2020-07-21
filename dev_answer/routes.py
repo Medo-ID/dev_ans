@@ -1,5 +1,6 @@
 import os
 import secrets
+import flask_whooshalchemy as wa
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from dev_answer import app, db, bcrypt, mail
@@ -8,12 +9,21 @@ from dev_answer.models import User, Post, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['WHOOSH_BASE'] = 'whoosh'
+wa.whoosh_index(app, Post)
 
 @app.route("/")
 @app.route("/home")
 def home():
     posts = Post.query.order_by(Post.date_posted.desc()).all()
     return render_template('home.html', posts=posts)
+
+
+@app.route("/search")
+def search():
+    posts = Post.query.whoosh_search(request.args.get('query')).all()
+    return render_template('home.html', posts=posts)    
 
 @app.route("/python.html")
 def ask_py():
@@ -50,12 +60,13 @@ def support():
 @login_required
 def ask_question():
     form = PostForm()
-    if form.validate_on_submit():
-        post = Post(title=form.title.data, category=form.category.data, content=form.content.data, author=current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your question has been created!')
-        return redirect(url_for('home'))
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            post = Post(title=form.title.data, category=form.category.data, content=form.content.data, author=current_user)
+            db.session.add(post)
+            db.session.commit()
+            flash('Your question has been created!')
+            return redirect(url_for('home'))
     return render_template('ask.html', title='Ask Question', page_title='Ask Your Question', 
                             legend='Here you can Ask Questions for getting help from dev community.', 
                             form=form, submit='Add Question', )
@@ -143,13 +154,15 @@ def profile():
     posts = Post.query.filter_by(author=current_user)
     form = UpdateProfileForm()
     if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
             current_user.image_file = picture_file
         current_user.fullname = form.fullname.data
         current_user.email = form.email.data
+        current_user.password = hashed_password 
         db.session.commit()
-        flash('your account has been updated successfully !', 'success')
+        flash('your account has been updated successfully !')
         return redirect(url_for('profile'))
     elif request.method == 'GET': 
         form.fullname.data = current_user.fullname
