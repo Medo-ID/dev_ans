@@ -410,8 +410,8 @@ hr{
 
 .info{
    float: right;
-   margin-right: 480px;
-   margin-top: 20px;
+   margin-right: 400px;
+   margin-top: 10px;
 }
 
 .name_mail, .mini_title{
@@ -790,7 +790,7 @@ tr td a{
         left: 35%;
     }
     .info{
-        float: left;;
+        float: left;
         margin-left: 10px;
         margin-top: 10px;
     }
