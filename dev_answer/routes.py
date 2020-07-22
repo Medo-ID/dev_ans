@@ -1,6 +1,6 @@
 import os
 import secrets
-'''import flask_whooshalchemy as wa'''
+import flask_whooshalchemy as wa
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from dev_answer import app, db, bcrypt, mail
