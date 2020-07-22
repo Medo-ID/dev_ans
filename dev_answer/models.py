@@ -1,4 +1,4 @@
-import flask_whooshalchemy as wa
+'''import flask_whooshalchemy as wa'''
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from dev_answer import db, login_manager, app

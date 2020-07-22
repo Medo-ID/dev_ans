@@ -1,6 +1,6 @@
 import os
 import secrets
-import flask_whooshalchemy as wa
+'''import flask_whooshalchemy as wa'''
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from dev_answer import app, db, bcrypt, mail
@@ -9,9 +9,9 @@ from dev_answer.models import User, Post, Comment
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+'''app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['WHOOSH_BASE'] = 'whoosh'
-wa.whoosh_index(app, Post)
+wa.whoosh_index(app, Post)'''
 
 @app.route("/")
 @app.route("/home")
@@ -20,10 +20,10 @@ def home():
     return render_template('home.html', posts=posts)
 
 
-@app.route("/search")
+'''@app.route("/search")
 def search():
     posts = Post.query.whoosh_search(request.args.get('query')).all()
-    return render_template('home.html', posts=posts)    
+    return render_template('home.html', posts=posts)'''   
 
 @app.route("/python.html")
 def ask_py():
