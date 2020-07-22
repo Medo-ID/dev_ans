@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="tags_bar">
-  <from class="search-box" method="GET" action="search">
-    <input type="text" class="search-area" name="query" id="query" placeholder="Search Question..get Answer">
+  <from class="search-box" method='GET' action='search'>
+    <input type="text" class="search-area" name="query" id="query" placeholder="Search for Question..Get Answer">
     <button type="submit" class="search-btn">Search</button>
   </from>
   <div class="tags">
     <a class="tag" href="python.html">.Py</a>
-    <a class="tag" href="javascrip.html">.Js</a>
+    <a class="tag" href="javascript.html">.Js</a>
     <a class="tag" href="cs.html">.Cs</a>
   </div>
   <button class="ask"><a href="{{ url_for('ask_question') }}">Ask Question</a></button>

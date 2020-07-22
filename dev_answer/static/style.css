@@ -51,14 +51,14 @@ header{
 nav ul{
     position: absolute;
     top: 20px;
-    left: 31.5%;
+    left: 30%;
 }
 
 nav ul li{
     display: inline-block;
     padding: 0 10px;
     list-style: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .nav{
@@ -214,6 +214,7 @@ nav ul li{
 }
 
 .search-btn{
+    font-size: 16px;
     color: white;
     float: right;
     padding: 5px;
@@ -428,6 +429,20 @@ hr{
     margin: 10px 10px;
 }
 
+.invalid1{
+    display: block;
+    color: red;
+    margin: 0 10px;
+    padding-left: 15px;
+    border-radius: 50px;
+    border: none;
+    border-radius: 20px;
+    width: 250px;
+    height: 30px;
+    box-shadow:0px 0px 5px #ff0000;
+
+}
+
 #section1{
     margin: 0px auto 20px auto;
 }
@@ -582,14 +597,15 @@ tr td a{
     font-size: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
-    text-decoration: solid #00b3b3;
+    text-decoration: underline;
     font-weight: 600;
 }
 
 .label_title{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+    margin-left: 10px;
     font-family: monospace, sans-serif;
 }
 
@@ -599,24 +615,28 @@ tr td a{
     border: 0.5px solid #00b3b3;
     border-radius: 5px 0 5px 0;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .tags-container{
     margin-top: 5px;
     margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .categorys{
     margin-left: -30px;
     margin-top: 5px;
+    margin-left: 10px;
     list-style: none;
     font-weight: 500;
 }
 
 .label_description{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 20px;
+    margin-left: 10px;
     font-family: monospace, sans-serif;
 }
 
@@ -639,7 +659,7 @@ tr td a{
     font-size: 16px;
     font-weight: 600;
     margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 10px;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 20px;

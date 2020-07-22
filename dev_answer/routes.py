@@ -30,10 +30,10 @@ def ask_py():
     posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Python")
     return render_template('python.html', title='Python Question', posts=posts)
 
-@app.route("/javascrip.html")
+@app.route("/javascript.html")
 def ask_js():
-    posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Javascrip")
-    return render_template('javascrip.html', title='JavaScript Question', posts=posts)
+    posts = Post.query.order_by(Post.date_posted.desc()).filter_by(category="JavaScript")
+    return render_template('javascript.html', title='JavaScript Question', posts=posts)
 
 @app.route("/cs.html")
 def ask_cs():
@@ -80,12 +80,14 @@ def update_question(post_id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
+        post.category = form.category.data
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('profile'))
     elif request.method == 'GET':
         form.title.data = post.title
+        form.category.data = post.category
         form.content.data = post.content
     return render_template('ask.html', title='Edit Question', form=form, page_title='Edit Your Question', 
                             legend='Here you can Edit your Questions.', submit='Update Question')    

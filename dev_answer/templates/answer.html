@@ -12,7 +12,7 @@
 <h2 class="second_answers">Answers</h2>
 {% for comment in post.post_comments %}
     <div class="answer_style">
-        <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + post.author.image_file) }}" alt="image_user">
+        <img class="image_home" src="{{ url_for('static', filename='profile_picts/' + comment.author.image_file) }}" alt="image_user">
         <h1>{{ comment.author.fullname }}</h1><br>
         <small>{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
         <p>{{ comment.body | safe }}</p>

@@ -18,10 +18,12 @@
                     {{ form.title(class="question_title") }}
                 {% endif %}
             </div>
+            <hr>
             <div class="tags-container">
                 {{ form.category.label(class="label_title") }}<br>
                 {{ form.category(class="categorys") }}
             </div>
+            <hr>
             <div class="">
                 {{ form.content.label(class="label_description") }}
                 {% if form.content.errors %}
@@ -35,6 +37,7 @@
                     {{ form.content(class="quest_description", id="editor") }}
                 {% endif %}
             </div>
+            <hr>
         <div class="button_post">
             <a class="cancel_home" href="{{ url_for('home') }}">Cancel</a>
             {{ form.submit(class="post_quest", value=submit) }}

@@ -8,7 +8,7 @@ from dev_answer.models import User
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    category = RadioField('Categorys', choices=[('Python',' .Python'),('Javascrip',' .Javascrip'),('C#',' .C#')])
+    category = RadioField('Categorys', choices=[('Python',' .Python'),('JavaScript',' .JavaScript'),('C#',' .C#')])
     content = TextAreaField('Describe the Question', validators=[DataRequired()])
     submit = SubmitField('Add Question')
 
