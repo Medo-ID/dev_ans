@@ -770,7 +770,18 @@ tr td a{
 }
 
 @media only screen and (max-width: 400px){
+    .update_btn{
+        margin: 10px 0;
+    }
+
+    .change{
+        margin: 10px 0;
+    }
     
+    .invalid1{
+        margin: 0;
+    }
+
     .input_text{
         border: none;
         margin: 10px 20px 10px -24px;
@@ -791,7 +802,6 @@ tr td a{
     }
     .info{
         float: left;
-        margin-left: 10px;
         margin-top: 10px;
     }
 
