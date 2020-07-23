@@ -826,25 +826,25 @@ tr td a{
     }
     
     nav ul{
-        padding-left: 20px;
-        padding-right: 20px;
-        width: 68%;
+        padding-left: 0px;
+        padding-right: 5px;
+        width: 82%;
         border-radius: 20px 20px 0 0;
         background-color: whitesmoke;
         position: absolute;
         top: 55px;
-        left: 11%;
+        left: 9.5%;
     }
 
     nav ul li{
         display: inline-block;
         padding: 0;
         list-style: none;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .nav{
-        width: 60px;
+        width: 65px;
         padding: 5px 2px;
     }
 
@@ -872,7 +872,7 @@ tr td a{
 
     .tags_bar{
         border-radius: 20px 20px 0 0;
-        width: 70%;
+        width: 71%;
         height: 5px;
         position: fixed;
         top: 83px;
@@ -905,14 +905,14 @@ tr td a{
         border-radius: 0 0 20px 20px;
         position: fixed;
         top: 132px;
-        left: 10%;
+        left: 9.5%;
         height: 25px;
         padding: 10px;
         z-index: 10;
     }
 
     .search-box:hover > .search-area{
-        width: 275px;
+        width: 205px;
         padding: 0;
     }
 
@@ -922,13 +922,13 @@ tr td a{
     }
     
     .search-btn{
-        padding: 5px 10px;
-        width: 40px;
+        padding: 0px 10px;
+        width: 70px;
         height: 25px;
     }
     
     .search-area{
-        width: 275px;
+        width: 205px;
     }
 
     /*------content-----*/
