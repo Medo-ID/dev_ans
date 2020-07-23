@@ -7,7 +7,7 @@ from dev_answer import app, db, bcrypt, mail
 from dev_answer.forms import RegistrationForm, LoginForm, UpdateProfileForm, PostForm, RequestResetPassForm, ResetPassForm, AnswerForm, ContactUsForm 
 from dev_answer.models import User, Post, Comment
 from flask_login import login_user, current_user, logout_user, login_required
-from flask_mail import Message
+from flask_mail import Mail, Message
 
 '''app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['WHOOSH_BASE'] = 'whoosh'
